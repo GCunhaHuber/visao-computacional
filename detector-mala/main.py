@@ -13,6 +13,10 @@ ARQUIVO_CLASSES = "detector-mala/coco{}.names".format("-tiny" if TINY else "")
 with open(ARQUIVO_CLASSES, "r") as arquivo:
     CLASSES = [linha.strip() for linha in arquivo.readlines()]
 
+# Verificar os índices das classes
+for i, nome_classe in enumerate(CLASSES):
+    print(f"{i}: {nome_classe}")
+
 # Gerar cores diferentes para cada classe
 CORES = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
@@ -25,6 +29,7 @@ def carregar_modelo_pretreinado():
     modelo.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
     if modelo.empty():
         raise IOError("Não foi possível carregar o modelo de detecção de objetos.")
+    print("Modelo carregado com sucesso.")
     return modelo
 
 def preprocessar_frame(frame):
@@ -55,9 +60,8 @@ def desenhar_deteccoes(frame, deteccoes, limiar=0.5):
     confiancas = []
     ids_classes = []
 
-    # Índices das classes "handbag" e "suitcase" no COCO dataset
-    idx_classes_malas = [26, 28]  # 26: handbag, 28: suitcase
-
+    
+    idx_classes_malas = [28] 
     for saida in deteccoes:
         for deteccao in saida:
             pontuacoes = deteccao[5:]
@@ -82,6 +86,7 @@ def desenhar_deteccoes(frame, deteccoes, limiar=0.5):
             cv2.rectangle(frame, (x, y), (x + largura_caixa, y + altura_caixa), cor, 2)
             texto = f"{CLASSES[ids_classes[i]]}: {confiancas[i]:.2f}"
             cv2.putText(frame, texto, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, cor, 2)
+            print(f"Detecção: {texto} - Caixa: {x, y, largura_caixa, altura_caixa}")
 
 def main():
     """
@@ -89,7 +94,7 @@ def main():
     """
     print("Inicializando o detector de objetos...")
     modelo = carregar_modelo_pretreinado()
-    caminho_do_video = 'detector-mala/1089569055-preview.mp4'
+    caminho_do_video = 'detector-mala/2843689-preview.mp4' 
     captura_video = cv2.VideoCapture(caminho_do_video)
 
     if not captura_video.isOpened():
@@ -102,8 +107,7 @@ def main():
         limiar_confianca = valor / 100
 
     cv2.namedWindow('Detecta Objetos')
-    if TINY:
-        cv2.createTrackbar('Limiar de Confiança', 'Detecta Objetos', int(limiar_confianca * 100), 100, ajustar_limiar)
+    cv2.createTrackbar('Limiar de Confiança', 'Detecta Objetos', int(limiar_confianca * 100), 100, ajustar_limiar)
 
     try:
         while True:
