@@ -1,5 +1,5 @@
 ### Motivo 
-A função desse código é para fazer a detecção de malas e bolsas em videos. Ele se utiliza o modelo YOLOv3 para fazer a detecção de objetos, nesse caso malas e bolsas.
+A função desse código é fazer a detecção de malas e bolsas em videos. Ele se utiliza o modelo YOLOv3 para fazer a detecção de objetos, nesse caso malas e bolsas.
 
 ### YOLOv3 com OpenCV em Python
 
