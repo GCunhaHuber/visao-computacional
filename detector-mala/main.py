@@ -94,7 +94,8 @@ def desenhar_deteccoes(frame, deteccoes, limiar=0.5):
             cv2.putText(frame, texto, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, cor, 2)
             print(f"Detecção: {texto} - Caixa: {x, y, largura_caixa, altura_caixa}")
 
-def main():
+def main(): 
+    
     """
     Executa a detecção de objetos em múltiplos vídeos.
     """
