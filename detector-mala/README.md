@@ -1,6 +1,9 @@
+### Motivo 
+A função desse código é para fazer a detecção de malas e bolsas em videos. Ele se utiliza o modelo YOLOv3 para fazer a detecção de objetos, nesse caso malas e bolsas.
+
 ### YOLOv3 com OpenCV em Python
 
-Este repositório contém um exemplo de uso do modelo YOLOv3 para detecção de objetos em tempo real utilizando OpenCV e Python. O código inclui o carregamento do modelo pré-treinado YOLOv3, a configuração do OpenCV DNN, e a realização da detecção de objetos em tempo real a partir de uma captura de vídeo (por exemplo, webcam).
+Este repositório contém o uso do modelo YOLOv3 para detecção de objetos utilizando OpenCV e Python. O código inclui o carregamento do modelo pré-treinado YOLOv3, a configuração do OpenCV DNN, e a realização do processamento de videos baixados com antecedencia.
 
 ### Links para Download de Modelos YOLO
 
